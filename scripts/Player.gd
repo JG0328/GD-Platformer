@@ -20,6 +20,9 @@ func _process(delta):
 		velocity.x = 0
 		$Anim.play("Idle")
 	
+	if velocity.y > 350:
+		get_tree().reload_current_scene()
+	
 	if is_on_floor() && Input.is_action_just_pressed("ui_accept"):
 		velocity.y -= jump
 		$Anim.play("Jump")
