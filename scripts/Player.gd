@@ -12,9 +12,21 @@ func _process(delta):
 		velocity.x += movement * speed * delta
 		$Anim.flip_h = movement < 0
 		$Anim.play("Walk")
+	elif velocity.x == 0 && velocity.y < 0:
+		$Anim.play("Jump")
+	elif velocity.x == 0 && velocity.y > 30:
+		$Anim.play("Fall")
 	else:
 		velocity.x = 0
 		$Anim.play("Idle")
+	
+	if is_on_floor() && Input.is_action_just_pressed("ui_accept"):
+		velocity.y -= jump
+		$Anim.play("Jump")
+	elif velocity.y < 0 && velocity.x!= 0:
+		$Anim.play("Jump")
+	elif velocity.y > 30 && velocity.x != 0:
+		$Anim.play("Fall")
 	
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
