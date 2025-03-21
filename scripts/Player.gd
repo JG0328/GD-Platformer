@@ -16,4 +16,5 @@ func _process(delta):
 		velocity.x = 0
 		$Anim.play("Idle")
 	
+	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
